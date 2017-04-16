@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <link rel="stylesheet" href="//cdn.webix.com/edge/webix.css" type="text/css">
+        <script src="//cdn.webix.com/edge/webix.js" type="text/javascript"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <button onclick="callController()">Call!</button>
+        <script type="text/javascript" charset="utf-8">
+            function callController(){
+                //alert("callController is called");
+            var request = new XMLHttpRequest();
+            request.open('GET', 'UIController', false);
+            request.send();
+            if (request.status !== 200) {
+                // обработать ошибку
+                alert(request.status + ': ' + request.statusText); // пример вывода: 404: Not Found
+            } else {
+                // вывести результат
+                alert(request.responseText); // responseText -- текст ответа.
+            }}
+        
+            var tabsNumber = 4;
+            var tabbar = {
+                view: "segmented",
+                id: 'tabbar',
+                value: 'listView',
+                multiview: true,
+                optionWidth: document.documentElement.clientWidth / tabsNumber,
+                align: "center",
+                padding: 5,
+                options: [
+                    {value: 'Sportsmen', id: 'listSportsmen'},
+                    {value: 'Current Race', id: 'currentRace'},
+                    {value: 'Last races results', id: 'archiveRaces'},
+                    {value: 'Next Races', id: 'nextRaces'}
+                ]
+            };
+            var multyview = {id: "mymulti",
+                cells: [
+                    {
+                        id: "listView",
+                        view: "list",
+                        template: "#rank#. #title# <div style='padding-left:18px'> Year:#year#, votes:#votes# </div>",
+                        type: {
+                            height: 60
+                        },
+                        select: true,
+                        //data: big_film_set
+                    },
+                    {
+                        id: "formView",
+                        view: "htmlform",
+//                                        content: "areaB",
+                        rules: {
+                            title: webix.rules.isNotEmpty,
+                            year: webix.rules.isNumber,
+                            rank: webix.rules.isNumber
+                        }
+                    },
+                    {id: "aboutView", template: "<i>Select an item in List to edit it in Form</i>", padding: 5}
+                ]}
+            webix.ui({
+//                container: "areaA",
+                padding: 8,
+                rows: [
+                    tabbar,
+                    {height: 5},
+                    multyview
+
+                ]
+            });
+
+//            $$('formView').bind($$('listView'));
+
+
+
+        </script>
+    </body>
+</html>
