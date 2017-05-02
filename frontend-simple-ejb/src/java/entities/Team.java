@@ -5,23 +5,24 @@
  */
 package entities;
 
+import java.io.IOException;
 import java.io.Serializable;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.ArrayList;
-import javax.json.Json;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import org.codehaus.jackson.map.ObjectMapper;
+import interfaces.ITeam;
 
 /**
  *
  * @author Анюта
  */
+
 @Entity
-public class Team implements Serializable {
+public class Team implements Serializable,ITeam {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -86,10 +87,12 @@ public class Team implements Serializable {
 
     @Override
     public String toString() {
-//        StringWriter writer = new StringWriter();
-//        Json.createWriter(writer).write(json);        
-//        return writer.toString();
-        return "";
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(this);
+        } catch (IOException ex) {
+            return ex.getLocalizedMessage();
+        }
     }
 
 }

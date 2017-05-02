@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <link rel="stylesheet" href="codebase/webix.css" type="text/css">
+        <script src="codebase/webix.js" type="text/javascript"></script>
+        <script src="js/callController.js" type="text/javascript"></script>
+        <script src="js/tabbar.js" type="text/javascript"></script>
+        <script src="js/testData.js" type="text/javascript"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>       
+        <script type="text/javascript" charset="utf-8">
+            
+            var sideWidth = document.documentElement.clientHeight / 20;
+            
+            var multyview = {id: "mymulti",
+                cells: [
+                    {
+                        id: "listSportsmen",
+                        view: "list",
+                        template: "#id#. <img src=#icon# height=32></> Team: #teamName# </div>",
+                        type: {
+                            height: 60
+                        },
+                        select: true,
+                        data: teamlist
+                    },
+                    {
+                        id: "currentRace",
+                        view: "list",
+
+                    },
+                    {id: "archiveRaces", template: "<p>Прошедшие гонки</p>", padding: 5},
+                    {id:"nextRaces", template:"<p>Следующие гонки</p>"}
+                ]}
+
+            var mainForm = {
+                id: "mainForm",
+                cols: [
+                    {
+                        width: sideWidth,
+                        rows: [
+                            {template: "<img src='icons/norway.png' height=20 alt='Log in'></>", height: 30, id:"login"},
+                            {template: "<img src='icons/norway.png' height=20></>", height: 30},
+                            {template: "<img src='icons/norway.png' height=20></>", height: 30}
+                        ]
+                    },
+                    {rows: [tabbar, multyview]}
+                ]
+            };
+            webix.ui(mainForm);
+
+        </script>
+       
+    </body>
+</html>

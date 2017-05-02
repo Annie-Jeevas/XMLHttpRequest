@@ -8,13 +8,14 @@ package servlets;
 import entities.Sportsman;
 import entities.Team;
 import java.io.IOException;
-import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import interfaces.ITeam;
 
 /**
  *
@@ -23,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 public class UIController extends HttpServlet {
     @PersistenceContext(unitName = "frontend-simple-ejbPU")
     EntityManager em;
+    @EJB
+    private ITeam norway;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +38,7 @@ public class UIController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Team norway = new Team();
+        
         norway.setIcon("path");
         norway.setTeamName("Norway");
         norway.getMembers().add(new Sportsman());
