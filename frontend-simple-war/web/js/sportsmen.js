@@ -1,10 +1,13 @@
+
+/* global $$ */
+
 function addSportsmen() {
     var list = $$('listSportsmen');
     var data = {
         name: $$('addSportsmenForm').getValues().name,
         birthdate: $$('addSportsmenForm').getValues().birthdate,
         accuracy: $$('addSportsmenForm').getValues().accuracy / 10,
-        gender: $$('addSportsmenForm').getValues().gender, //??
+        gender: $$('addSportsmenForm').getValues().gender,
         team: $$('addSportsmenForm').getValues().team
     };
     list.add(data);
@@ -12,7 +15,7 @@ function addSportsmen() {
 ;
 
 function addTeam() {
-    var list = $$('listSportsmen'); //добавление в список групп, а не спортсменов?
+    var list = $$('listTeam');
     var data = {
         teamName: $$('addTeamForm').getValues().name
     };
@@ -21,6 +24,14 @@ function addTeam() {
 ;
 
 var sideWidth = document.documentElement.clientHeight / 20;
+
+var listTeam = {
+    id: "listTeam",
+    view: "list",
+    url: "http://localhost:8080/cronos-war/TeamController",
+    datatype: "json",
+    save: "connector->http://localhost:8080/cronos-war/TeamController"
+};
 
 var listSportsmen = {
     id: "listSportsmen",
@@ -87,7 +98,7 @@ var addSportsmenForm = {
             width: 250
         },
         {
-            name: "birthdate:",
+            name: "birthdate",
             view: "datepicker",
             value: new Date(1990, 1, 1),
             placeholder: "Введите дату рождения",
@@ -95,9 +106,9 @@ var addSportsmenForm = {
             width: 250
         },
         {
-            name: "accuracy:",
+            name: "accuracy",
             view: "slider",
-            value: 5,
+            value: 5, // порядок точности какой?
             min: 1,
             max: 10,
             title: "Точность: 0.5",
@@ -107,6 +118,7 @@ var addSportsmenForm = {
                 onChange: function () {
                     this.define("title", "Точность: " + this.getValue() / 10);
                     this.refresh();
+
                 },
                 onSliderDrag: function () {
                     this.define("title", "Точность: " + this.getValue() / 10);
@@ -115,16 +127,21 @@ var addSportsmenForm = {
             }
         },
         {
-            name: "gender:",
-            view: "checkbox",
-            label: "Gender",
+            name: "gender",
+            view: "radio",
+            label: "Пол:",
+            value: true,
+            options: [
+                {id: true, value: "М"},
+                {id: false, value: "Ж"}
+            ],
             align: "left",
             width: 250
         },
         {
             name: "team",
             view: "richselect",
-            options: teamlist,
+            options: teamlist, // Заменить на listTeam когда будет связь с контроллерами ? 
             placeholder: "Выберите команду",
             align: "left",
             width: 250

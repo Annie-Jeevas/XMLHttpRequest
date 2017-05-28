@@ -26,7 +26,7 @@ and open the template in the editor.
 
             var cells = [
                 {
-                    header: "Sportsmen",
+                    header: "Данные о спортсмене",
                     body: {
                         rows: [
                             {height: 2}, //пробел между менюшками, либо цвет тулбара изменить 
@@ -54,20 +54,20 @@ and open the template in the editor.
                     }
                 },
                 {
-                    header: "Current Race",
+                    header: "Текущие гонки",
                     body: {
                         id: "currentRace",
                         view: "list"}
                 },
                 {
-                    header: "Race Archive",
+                    header: "Прошедшие гонки",
                     body: {
                         id: "archiveRaces",
                         rows: [details,raceArchive]
                     }
                 },
                 {
-                    header: "Next Races",
+                    header: "Предстоящие гонки",
                     body: {
                         id: "nextRaces",
                         template: "<p>Следующие гонки</p>"
